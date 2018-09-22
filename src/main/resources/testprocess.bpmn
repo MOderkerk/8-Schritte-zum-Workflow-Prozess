@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_0xqpusa" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="2.0.1">
+  <bpmn:process id="Testprocess" name="Testprocess" isExecutable="true" camunda:versionTag="1.0">
+    <bpmn:startEvent id="StartEvent_1" camunda:asyncAfter="true" camunda:jobPriority="1">
+      <bpmn:extensionElements>
+        <camunda:failedJobRetryTimeCycle>30</camunda:failedJobRetryTimeCycle>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>SequenceFlow_0wa4k97</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="Task_05lu7sy" name="Approve" camunda:assignee="User">
+      <bpmn:incoming>SequenceFlow_1mv8z0d</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_096mb78</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="EndEvent_0wk49f5">
+      <bpmn:incoming>SequenceFlow_096mb78</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0wa4k97" sourceRef="StartEvent_1" targetRef="Task_Sendping" />
+    <bpmn:sequenceFlow id="SequenceFlow_096mb78" sourceRef="Task_05lu7sy" targetRef="EndEvent_0wk49f5" />
+    <bpmn:serviceTask id="Task_Sendping" name="Send Ping" camunda:class="de.oderkerk.bpm.test.PingWebsiteDelegate">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="stateOfPing" />
+          <camunda:outputParameter name="stateOfPing" />
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0wa4k97</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1mv8z0d</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_1mv8z0d" sourceRef="Task_Sendping" targetRef="Task_05lu7sy" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Testprocess">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="173" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_0mxlnei_di" bpmnElement="Task_05lu7sy">
+        <dc:Bounds x="545" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0wk49f5_di" bpmnElement="EndEvent_0wk49f5">
+        <dc:Bounds x="753" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0wa4k97_di" bpmnElement="SequenceFlow_0wa4k97">
+        <di:waypoint x="209" y="120" />
+        <di:waypoint x="267" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_096mb78_di" bpmnElement="SequenceFlow_096mb78">
+        <di:waypoint x="645" y="120" />
+        <di:waypoint x="753" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_1v5muvw_di" bpmnElement="Task_Sendping">
+        <dc:Bounds x="267" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1mv8z0d_di" bpmnElement="SequenceFlow_1mv8z0d">
+        <di:waypoint x="367" y="120" />
+        <di:waypoint x="545" y="120" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
