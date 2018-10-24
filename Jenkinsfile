@@ -7,13 +7,13 @@ node()
   stage('Build')
   {
     withMaven(maven: 'maven') {
-      sh "mvv clean install -DskipTests=true"
+      sh "mvn clean install -DskipTests=true"
     }
   }
   stage('Test')
   {
     withMaven(maven: 'maven') {
-      sh "mvv test"   
+      sh "mvn test"   
     } 
   }
   
