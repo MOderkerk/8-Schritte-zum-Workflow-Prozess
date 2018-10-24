@@ -13,7 +13,7 @@ node()
   stage('Test')
   {
     withMaven(maven: 'maven') {
-      sh "mvv test"
+      sh "mvv test"   
     } 
   }
   
