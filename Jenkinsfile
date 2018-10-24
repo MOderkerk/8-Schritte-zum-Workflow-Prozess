@@ -14,7 +14,7 @@ node()
   {
     withMaven(maven: 'maven') {
       sh "mvv test"
-    }
+    } 
   }
   
 }
